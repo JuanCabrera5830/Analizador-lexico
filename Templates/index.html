@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Analizador léxico</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #aaa;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>Analizador léxico</h1>
+
+    <form method="POST">
+        <textarea name="palabra" rows="4" cols="80">{{ entrada }}</textarea><br><br>
+        <button type="submit">Analizar</button>
+    </form>
+
+    {% if tokens %}
+    <table>
+        <tr>
+            <th>Palabra Reservada</th>
+            <th>Identificador</th>
+            <th>Número</th>
+            <th>Símbolo</th>
+            <th>Desconocido</th>
+        </tr>
+
+        {# Mostrar una fila por token, según su categoría #}
+        {% for token in tokens.palabras_reservadas %}
+        <tr>
+            <td>{{ token }}</td>
+            <td></td><td></td><td></td><td></td>
+        </tr>
+        {% endfor %}
+
+        {% for token in tokens.identificadores %}
+        <tr>
+            <td></td>
+            <td>{{ token }}</td>
+            <td></td><td></td><td></td>
+        </tr>
+        {% endfor %}
+
+        {% for token in tokens.numeros %}
+        <tr>
+            <td></td><td></td>
+            <td>{{ token }}</td>
+            <td></td><td></td>
+        </tr>
+        {% endfor %}
+
+        {% for token in tokens.simbolos %}
+        <tr>
+            <td></td><td></td><td></td>
+            <td>{{ token }}</td>
+            <td></td>
+        </tr>
+        {% endfor %}
+
+        {% for token in tokens.desconocidos %}
+        <tr>
+            <td></td><td></td><td></td><td></td>
+            <td>{{ token }}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+    {% endif %}
+</body>
+</html>
